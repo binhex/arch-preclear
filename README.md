@@ -29,8 +29,8 @@ docker run -d \
     -e WEBPAGE_TITLE=<name shown in browser tab> \
     -e VNC_PASSWORD=<password for web ui> \
     -e UMASK=<umask for created files> \
-    -e PUID=<uid for user> \
-    -e PGID=<gid for user> \
+    -e PUID=0 \
+    -e PGID=0 \
     binhex/arch-preclear
 ```
 
