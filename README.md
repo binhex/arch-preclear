@@ -10,7 +10,7 @@ This utility was created by Joe L. and later modified by bjp999 (https://forums.
 
 **Build notes**
 
-This is a Docker image specifically for unRAID users ONLY - do NOT attempt to use this utility with other operating systems.
+IMPORTANT - This is a Docker image specifically for unRAID users ONLY - do NOT attempt to use this utility with other operating systems.
 
 **Usage**
 ```
@@ -19,10 +19,11 @@ docker run -d \
     -p 6080:6080 \
     --name=<container name> \
     --privileged=true \
-    -v /boot/config/disk.cfg:/boot/config/disk.cfg \
-    -v /boot/config/super.dat:/boot/config/super.dat \
-    -v /var/local/emhttp/disks.ini:/var/local/emhttp/disks.ini \
-    -v /dev/disk/by-id:/dev/disk/by-id \
+    -v /boot/config/disk.cfg:/unraid/config/disk.cfg:ro \
+    -v /boot/config/super.dat:/unraid/config/super.dat:ro \
+    -v /var/local/emhttp/disks.ini:/unraid/emhttp/disks.ini:ro \
+    -v /usr/local/sbin/mdcmd:/unraid/mdcmd:ro \
+    -v /dev/disk/by-id:/unraid/disk/by-id:ro \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
     -e WEBPAGE_TITLE=<name shown in browser tab> \
@@ -42,10 +43,11 @@ docker run -d \
     -p 6080:6080 \
     --name=preclear \
     --privileged=true \
-    -v /boot/config/disk.cfg:/boot/config/disk.cfg \
-    -v /boot/config/super.dat:/boot/config/super.dat \
-    -v /var/local/emhttp/disks.ini:/var/local/emhttp/disks.ini \
-    -v /dev/disk/by-id:/dev/disk/by-id \
+    -v /boot/config/disk.cfg:/unraid/config/disk.cfg:ro \
+    -v /boot/config/super.dat:/unraid/config/super.dat:ro \
+    -v /var/local/emhttp/disks.ini:/unraid/emhttp/disks.ini:ro \
+    -v /usr/local/sbin/mdcmd:/unraid/mdcmd:ro \
+    -v /dev/disk/by-id:/unraid/disk/by-id:ro \
     -v /apps/docker/preclear:/config \
     -v /etc/localtime:/etc/localtime:ro \
     -e WEBPAGE_TITLE=Preclear \
