@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages=""
+pacman_packages="smartmontools"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -39,7 +39,7 @@ source aur.sh
 ####
 
 # download preclear script - this is the modified 'faster' bjp version with additional tweaks to make it docker friendly
-curly.sh -rc 6 -rw 10 -of "/usr/local/bin/preclear_bjp.sh" -url "https://raw.githubusercontent.com/binhex/scripts/master/shell/unraid/system/preclear_binhex.sh"
+curly.sh -rc 6 -rw 10 -of "/usr/local/bin/preclear_binhex.sh" -url "https://raw.githubusercontent.com/binhex/scripts/master/shell/unraid/system/preclear_binhex.sh"
 
 # mark script as executable
 chmod +x "/usr/local/bin/preclear_binhex.sh"
