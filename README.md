@@ -10,7 +10,7 @@ This utility was created by Joe L. and later modified by bjp999 (https://forums.
 
 **Build notes**
 
-IMPORTANT - This is a Docker image specifically for unRAID users ONLY - do NOT attempt to use this utility with other operating systems.
+IMPORTANT - This is Docker image is specifically for unRAID users ONLY - do NOT attempt to use this utility with other operating systems.
 
 **Usage**
 ```
