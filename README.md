@@ -6,7 +6,7 @@
 
 A utility to "burn-in" a new disk, before adding it to your array has been requested several times.  Also requested is a process to "pre-clear" a hard disk before adding it to your array.  When a special "signature" is detected, the lengthy "clearing" step otherwise performed by unRAID is skipped.
 
-This utility was created by Joe L. and later modified by bjp999 (https://forums.unraid.net/topic/30921-unofficial-faster-preclear/), all credit goes to both of these authors for the script.
+This utility was created by [Joe L.](https://forums.unraid.net/topic/2732-preclear_disksh-a-new-utility-to-burn-in-and-pre-clear-disks-for-quick-add/) and later modified by [bjp999](https://forums.unraid.net/topic/30921-unofficial-faster-preclear/), all credit goes to both of these authors for the script.
 
 **Build notes**
 
