@@ -39,13 +39,13 @@ source aur.sh
 ####
 
 # download preclear script - this is the modified 'faster' bjp version with additional tweaks to make it docker friendly
-curly.sh -rc 6 -rw 10 -of "/usr/local/bin/preclear_binhex.sh" -url "https://raw.githubusercontent.com/binhex/scripts/master/shell/unraid/system/preclear_binhex.sh"
+curly.sh -rc 6 -rw 10 -of "/usr/local/bin/preclear_binhex.sh" -url "https://raw.githubusercontent.com/binhex/scripts/master/shell/unraid/system/preclear/binhex/preclear_binhex.sh"
 
 # mark script as executable
 chmod +x "/usr/local/bin/preclear_binhex.sh"
 
 # download readvz (64 bit) utility - referenced by preclear script
-curly.sh -rc 6 -rw 10 -of "/usr/local/bin/readvz" -url "https://raw.githubusercontent.com/binhex/scripts/master/shell/unraid/system/readvz"
+curly.sh -rc 6 -rw 10 -of "/usr/local/bin/readvz" -url "https://raw.githubusercontent.com/binhex/scripts/master/shell/unraid/system/preclear/binhex/readvz"
 
 # mark readvz as executable
 chmod +x "/usr/local/bin/readvz"
