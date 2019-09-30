@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="smartmontools parted s-nail"
+pacman_packages="smartmontools parted"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -30,7 +30,7 @@ fi
 ####
 
 # define aur packages
-aur_packages=""
+aur_packages="ssmtp"
 
 # call aur install script (arch user repo)
 source aur.sh
