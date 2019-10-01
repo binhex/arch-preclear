@@ -61,13 +61,16 @@ cat <<'EOF' > /tmp/startcmd_heredoc
 # note failure to launch xfce4-terminal in the below manner will result in the classic xcb missing error
 dbus-run-session -- xfce4-terminal
 
-# copy unraid ssmtp config file (used by dynamix notification) from the host to the volume mount, and 
-# then softlink back to location expected by ssmtp. we then add in path to CA trusted certs bundle 
-# for arch linux
-if [ ! -f '/etc/ssmtp/ssmtp.conf' ]; then
+# copy unraid ssmtp config file (used by dynamix notification) from the host to the volume mount and
+# we then add in path to CA trusted certs bundle for arch linux
+if [ ! -f '/config/ssmtp/ssmtp.conf' ]; then
 	mkdir -p /config/ssmtp && cp '/unraid/ssmtp.conf' '/config/ssmtp/ssmtp.conf'
+	echo 'TLS_CA_FILE=/etc/ca-certificates/extracted/ca-bundle.trust.crt' >> '/config/ssmtp/ssmtp.conf'
+fi
+
+# softlink ssmtp config file back to location expected by ssmtp
+if [ ! -f '/etc/ssmtp/ssmtp.conf' ]; then
 	mkdir -p /etc/ssmtp && ln -s '/config/ssmtp/ssmtp.conf' '/etc/ssmtp/ssmtp.conf'
-	echo 'TLS_CA_FILE=/etc/ca-certificates/extracted/ca-bundle.trust.crt' >> '/etc/ssmtp/ssmtp.conf'
 fi
 EOF
 
