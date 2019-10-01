@@ -127,7 +127,7 @@ export KDE_SESSION_VERSION=5 KDE_FULL_SESSION=true
 # copy unraid ssmtp config file (used by dynamix notification) from the host to the volume mount and
 # we then add in path to CA trusted certs bundle for arch linux
 if [ ! -f '/config/ssmtp/ssmtp.conf' ]; then
-	mkdir -p /config/ssmtp && cp '/unraid/ssmtp.conf' '/config/ssmtp/ssmtp.conf'
+	mkdir -p /config/ssmtp && cp '/unraid/ssmtp/ssmtp.conf' '/config/ssmtp/ssmtp.conf'
 	echo 'TLS_CA_FILE=/etc/ca-certificates/extracted/ca-bundle.trust.crt' >> '/config/ssmtp/ssmtp.conf'
 fi
 
@@ -135,6 +135,8 @@ fi
 if [ ! -f '/etc/ssmtp/ssmtp.conf' ]; then
 	mkdir -p /etc/ssmtp && ln -s '/config/ssmtp/ssmtp.conf' '/etc/ssmtp/ssmtp.conf'
 fi
+
+chmod 600 '/config/ssmtp/ssmtp.conf'
 EOF
 
 # replace permissions placeholder string with contents of file (here doc)
