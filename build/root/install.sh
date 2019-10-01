@@ -50,6 +50,9 @@ curly.sh -rc 6 -rw 10 -of "/usr/local/bin/readvz" -url "https://raw.githubuserco
 # mark readvz as executable
 chmod +x "/usr/local/bin/readvz"
 
+# delete default ssmtp.conf, as we copy across the unraid configured file
+rm -f '/etc/ssmtp/ssmtp.conf'
+
 # config novnc
 ###
 
