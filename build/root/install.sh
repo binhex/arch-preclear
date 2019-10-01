@@ -63,18 +63,6 @@ cat <<'EOF' > /tmp/startcmd_heredoc
 # launch xfce4-terminal (we cannot simply call /usr/bin/xfce4-terminal otherwise it wont run on startup)
 # note failure to launch xfce4-terminal in the below manner will result in the classic xcb missing error
 dbus-run-session -- xfce4-terminal
-
-# copy unraid ssmtp config file (used by dynamix notification) from the host to the volume mount and
-# we then add in path to CA trusted certs bundle for arch linux
-if [ ! -f '/config/ssmtp/ssmtp.conf' ]; then
-	mkdir -p /config/ssmtp && cp '/unraid/ssmtp.conf' '/config/ssmtp/ssmtp.conf'
-	echo 'TLS_CA_FILE=/etc/ca-certificates/extracted/ca-bundle.trust.crt' >> '/config/ssmtp/ssmtp.conf'
-fi
-
-# softlink ssmtp config file back to location expected by ssmtp
-if [ ! -f '/etc/ssmtp/ssmtp.conf' ]; then
-	mkdir -p /etc/ssmtp && ln -s '/config/ssmtp/ssmtp.conf' '/etc/ssmtp/ssmtp.conf'
-fi
 EOF
 
 # replace startcmd placeholder string with contents of file (here doc)
@@ -135,6 +123,18 @@ export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt/plugins/platforms
 
 # env vars required to enable menu icons for hexchat (also requires breeze-icons package)
 export KDE_SESSION_VERSION=5 KDE_FULL_SESSION=true
+
+# copy unraid ssmtp config file (used by dynamix notification) from the host to the volume mount and
+# we then add in path to CA trusted certs bundle for arch linux
+if [ ! -f '/config/ssmtp/ssmtp.conf' ]; then
+	mkdir -p /config/ssmtp && cp '/unraid/ssmtp.conf' '/config/ssmtp/ssmtp.conf'
+	echo 'TLS_CA_FILE=/etc/ca-certificates/extracted/ca-bundle.trust.crt' >> '/config/ssmtp/ssmtp.conf'
+fi
+
+# softlink ssmtp config file back to location expected by ssmtp
+if [ ! -f '/etc/ssmtp/ssmtp.conf' ]; then
+	mkdir -p /etc/ssmtp && ln -s '/config/ssmtp/ssmtp.conf' '/etc/ssmtp/ssmtp.conf'
+fi
 EOF
 
 # replace permissions placeholder string with contents of file (here doc)
