@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="smartmontools parted"
+pacman_packages="smartmontools parted s-nail"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -60,6 +60,14 @@ cat <<'EOF' > /tmp/startcmd_heredoc
 # launch xfce4-terminal (we cannot simply call /usr/bin/xfce4-terminal otherwise it wont run on startup)
 # note failure to launch xfce4-terminal in the below manner will result in the classic xcb missing error
 dbus-run-session -- xfce4-terminal
+
+# copy unraid ssmtp config file (used by dynamix notification) from the host to the container and 
+# then add in path to CA trusted certs bundle for arch linux
+if [ ! -f '/etc/ssmtp/ssmtp.conf' ]; then
+	mkdir -p /config/ssmtp && cp '/unraid/ssmtp.conf' '/config/ssmtp/ssmtp.conf'
+	mkdir -p /etc/ssmtp && ln -s '/config/ssmtp/ssmtp.conf' '/etc/ssmtp/ssmtp.conf'
+	echo 'TLS_CA_FILE=/etc/ca-certificates/extracted/ca-bundle.trust.crt' >> '/etc/ssmtp/ssmtp.conf'
+fi
 EOF
 
 # replace startcmd placeholder string with contents of file (here doc)
