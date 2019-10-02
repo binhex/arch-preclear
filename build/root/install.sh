@@ -124,19 +124,29 @@ export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt/plugins/platforms
 # env vars required to enable menu icons for hexchat (also requires breeze-icons package)
 export KDE_SESSION_VERSION=5 KDE_FULL_SESSION=true
 
-# copy unraid ssmtp config file (used by dynamix notification) from the host to the volume mount and
-# we then add in path to CA trusted certs bundle for arch linux
-if [ ! -f '/config/ssmtp/ssmtp.conf' ]; then
-	mkdir -p /config/ssmtp && cp '/unraid/ssmtp/ssmtp.conf' '/config/ssmtp/ssmtp.conf'
-	echo 'TLS_CA_FILE=/etc/ca-certificates/extracted/ca-bundle.trust.crt' >> '/config/ssmtp/ssmtp.conf'
-fi
+if [ -f '/unraid/ssmtp/ssmtp.conf' ]; then
 
-# softlink ssmtp config file back to location expected by ssmtp
-if [ ! -f '/etc/ssmtp/ssmtp.conf' ]; then
-	mkdir -p /etc/ssmtp && ln -s '/config/ssmtp/ssmtp.conf' '/etc/ssmtp/ssmtp.conf'
-fi
+	# copy unraid ssmtp config file (used by dynamix notification) from the host to the volume mount and
+	# we then add in path to CA trusted certs bundle for arch linux
+	if [ ! -f '/config/ssmtp/ssmtp.conf' ]; then
+		echo "[info] copying unraid mail config file '/unraid/ssmtp/ssmtp.conf' to '/config/ssmtp/ssmtp.conf'..." | ts '%Y-%m-%d %H:%M:%.S'
+		mkdir -p /config/ssmtp && cp '/unraid/ssmtp/ssmtp.conf' '/config/ssmtp/ssmtp.conf'
+		echo 'TLS_CA_FILE=/etc/ca-certificates/extracted/ca-bundle.trust.crt' >> '/config/ssmtp/ssmtp.conf'
+	fi
 
-chmod 600 '/config/ssmtp/ssmtp.conf'
+	# softlink ssmtp config file back to location expected by ssmtp
+	if [ ! -f '/etc/ssmtp/ssmtp.conf' ]; then
+		echo "[info] creating softlink from copied unraid mail config file '/config/ssmtp/ssmtp.conf' to '/etc/ssmtp/ssmtp.conf'..." | ts '%Y-%m-%d %H:%M:%.S'
+		mkdir -p /etc/ssmtp && ln -s '/config/ssmtp/ssmtp.conf' '/etc/ssmtp/ssmtp.conf'
+	fi
+
+	chmod 600 '/config/ssmtp/ssmtp.conf'
+
+else
+
+	echo "[warn] container is missing required volume mount for mail config '/unraid/ssmtp/ssmtp.conf'" | ts '%Y-%m-%d %H:%M:%.S'
+
+fi
 EOF
 
 # replace permissions placeholder string with contents of file (here doc)
