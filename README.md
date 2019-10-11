@@ -24,6 +24,8 @@ docker run -d \
     -v /var/local/emhttp/disks.ini:/unraid/emhttp/disks.ini:ro \
     -v /usr/local/sbin/mdcmd:/unraid/mdcmd:ro \
     -v /dev/disk/by-id:/unraid/disk/by-id:ro \
+    -v /boot/config/plugins/dynamix/dynamix.cfg:/unraid/config/plugins/dynamix/dynamix.cfg:ro \
+    -v /etc/ssmtp/ssmtp.conf:/unraid/ssmtp/ssmtp.conf:ro \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
     -e WEBPAGE_TITLE=<name shown in browser tab> \
@@ -48,6 +50,8 @@ docker run -d \
     -v /var/local/emhttp/disks.ini:/unraid/emhttp/disks.ini:ro \
     -v /usr/local/sbin/mdcmd:/unraid/mdcmd:ro \
     -v /dev/disk/by-id:/unraid/disk/by-id:ro \
+    -v /boot/config/plugins/dynamix/dynamix.cfg:/unraid/config/plugins/dynamix/dynamix.cfg:ro \
+    -v /etc/ssmtp/ssmtp.conf:/unraid/ssmtp/ssmtp.conf:ro \
     -v /apps/docker/preclear:/config \
     -v /etc/localtime:/etc/localtime:ro \
     -e WEBPAGE_TITLE=Preclear \
