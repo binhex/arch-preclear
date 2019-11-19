@@ -30,7 +30,7 @@ fi
 ####
 
 # define aur packages
-aur_packages="ssmtp"
+aur_packages="websockify ssmtp"
 
 # call aur install script (arch user repo)
 source aur.sh
