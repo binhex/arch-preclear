@@ -30,6 +30,7 @@ docker run -d \
     -v /etc/localtime:/etc/localtime:ro \
     -e WEBPAGE_TITLE=<name shown in browser tab> \
     -e VNC_PASSWORD=<password for web ui> \
+    -e ENABLE_STARTUP_SCRIPTS=<install additional packages> \
     -e UMASK=<umask for created files> \
     -e PUID=0 \
     -e PGID=0 \
@@ -56,6 +57,7 @@ docker run -d \
     -v /etc/localtime:/etc/localtime:ro \
     -e WEBPAGE_TITLE=Preclear \
     -e VNC_PASSWORD=mypassword \
+    -e ENABLE_STARTUP_SCRIPTS=yes \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
